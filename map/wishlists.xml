@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="wishlists">
+	<select id="selectWishlistJW" resultType="Book" parameterType="Wishlist">
+SELECT no,title,bookCover,writer,publisher,ratingSum,ratingCount,salesPrice,originalPrice,publicationDate, wishlistNo,wishRegdate,wishUserNo
+FROM(SELECT no,title,bookCover,writer,publisher,ratingSum,ratingCount,salesPrice,originalPrice,publicationDate, wishlistNo,wishRegdate,wishUserNo,rownum r
+FROM(SELECT b.no no,b.title title,b.book_cover bookCover,b.writer writer,b.publisher publisher,b.rating_sum ratingSum,b.rating_count ratingCount,b.sales_price salesPrice,b.original_price originalPrice, b.publication_date publicationDate,
+		 w.no wishlistNo,w.regdate wishRegdate,w.user_no wishUserNo
+FROM wishlist w, books b
+WHERE w.book_no=b.no AND w.user_no=#{userNo}
+ORDER BY w.regdate DESC))
+WHERE r BETWEEN #{start} AND #{end}
+	</select>
+	
+	<select id="wishlistOldOrderJW" resultType="Book" parameterType="int">
+SELECT no,title,bookCover,writer,publisher,ratingSum,ratingCount,salesPrice,originalPrice,publicationDate, wishlistNo,wishRegdate,wishUserNo
+FROM(SELECT no,title,bookCover,writer,publisher,ratingSum,ratingCount,salesPrice,originalPrice,publicationDate, wishlistNo,wishRegdate,wishUserNo,rownum r
+FROM(SELECT b.no no,b.title title,b.book_cover bookCover,b.writer writer,b.publisher publisher,b.rating_sum ratingSum,b.rating_count ratingCount,b.sales_price salesPrice,b.original_price originalPrice, b.publication_date publicationDate,
+		 w.no wishlistNo,w.regdate wishRegdate,w.user_no wishUserNo
+FROM wishlist w, books b
+WHERE w.book_no=b.no AND w.user_no=#{userNo}
+ORDER BY w.regdate ASC))
+WHERE r BETWEEN #{start} AND #{end}
+	</select>
+	
+	<delete id="deleteWishlistJW" parameterType="int">
+	DELETE FROM wishlist
+	WHERE no=#{no}
+	</delete>
+	
+	
+	<!-- 선영 -->
+	<insert id="insertSY" parameterType="Wishlist">
+INSERT INTO wishlist(no, regdate, book_no, user_no)
+VALUES (wishlist_seq.nextval, systimestamp, #{bookNo}, #{userNo})
+</insert>
+</mapper>

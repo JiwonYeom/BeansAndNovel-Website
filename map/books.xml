@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="books">
+
+	<!-- 총 게시물 수 -->
+<select id="selectTotalJW" resultType="int" parameterType="Book">
+SELECT COUNT(*)
+FROM books
+<where>
+<if test='categoryNo!=0'>
+ category_no=#{categoryNo}
+</if>
+<if test='writer!=null and !writer.equals("")'>
+ writer=#{writer}
+</if>
+<if test='publisher!=null and !publisher.equals("")'>
+ publisher=#{publisher}
+</if>
+<if test='type1!=null and !type1.equals("")'>
+ type1=#{type1}
+</if>
+<if test='type2!=null and !type2.equals("")'>
+ type2=#{type2}
+</if>
+<if test='salesPriceStart!=0 and salesPriceEnd!=0'>
+ sales_price BETWEEN #{salesPriceStart} AND #{salesPriceEnd}
+</if>
+<if test='difference!=null and !difference.equals("")'>
+ sales_price!=original_price
+</if>
+</where>
+</select>
+
+<!-- 리스트 페이징처리 -->
+<select id="selectListJW" parameterType="Book" resultType="Book">
+SELECT no,ratingCount,ratingSum,title,bookCover,writer,publisher,publicationDate,originalPrice,salesPrice,salesVolume,regdate, categoryNo
+FROM(SELECT no,ratingCount, ratingSum,title,bookCover,writer,publisher,publicationDate,originalPrice,salesPrice,salesVolume,regdate, categoryNo,rownum r
+FROM(SELECT no,rating_count ratingCount, rating_sum ratingSum, title,book_cover bookCover,writer,publisher,publication_date publicationDate,original_price originalPrice,sales_price salesPrice,sales_volume salesVolume,regdate,category_no categoryNo
+	FROM books
+<where>
+<if test='categoryNo!=0'>
+ category_no=#{categoryNo}
+</if>
+<if test='writer!=null and !writer.equals("")'>
+ writer=#{writer}
+</if>
+<if test='publisher!=null and !publisher.equals("")'>
+ publisher=#{publisher}
+</if>
+<if test='type1!=null and !type1.equals("")'>
+ type1=#{type1}
+</if>
+<if test='type2!=null and !type2.equals("")'>
+ type2=#{type2}
+</if>
+<if test='salesPriceStart!=0 and salesPriceEnd!=0'>
+   sales_price BETWEEN #{salesPriceStart} AND #{salesPriceEnd}
+</if>
+<if test='difference!=null and !difference.equals("")'>
+ sales_price!=original_price
+</if>
+</where>
+<if test='orderBy!=null and !orderBy.equals("")'>
+ORDER BY #{orderBy}
+</if>
+
+))
+WHERE r BETWEEN #{start} AND #{end}
+</select>
+
+<!-- award -->
+<select id="selectAwardJW" resultType="Book" parameterType="Book">
+SELECT no,ratingSum, ratingCount,title,bookCover,writer,publisher,publicationDate,originalPrice,salesPrice,salesVolume,regdate,categoryNo, awardedBookNo, awardNo,awardName
+FROM(SELECT no,ratingSum, ratingCount,title,bookCover,writer,publisher,publicationDate,originalPrice,salesPrice,salesVolume,regdate,categoryNo, awardedBookNo, awardNo,awardName,rownum r
+FROM(SELECT b.no no,rating_sum ratingSum, rating_count ratingCount, title,book_cover bookCover,writer,publisher,publication_date publicationDate,original_price originalPrice,sales_price salesPrice,sales_volume salesVolume,b.regdate regdate,category_no categoryNo,
+		a.book_no awardedBookNo, a.award_no awardNo, aw.name awardName
+FROM books b, awarded_books a, awards aw
+WHERE b.no=a.book_no AND a.award_no = aw.no AND a.award_no=#{awardNo}))
+WHERE r BETWEEN #{start} AND #{end}
+</select>
+
+<select id="selectAwardTotalJW" resultType="int" parameterType="int">
+SELECT COUNT(b.no)
+FROM books b, awarded_books a
+WHERE b.no=a.book_no AND a.award_no=#{awardNo}
+</select>
+
+<!-- 신태 -->
+
+<!-- 도서 연관 검색어 창 -->	
+<select id="selectListKst" parameterType="String" resultType="Book">
+SELECT no,title,book_cover bookCover,writer,publisher,publication_date publicationDate,original_price originalPrice,sales_price salesPrice,introduction,table_of_contents tableOfContents,sales_volume salesVolume,type1,type2,rating_sum ratingSum,rating_count ratingCount,regdate,stock,category_no categoryNo
+FROM books
+WHERE title like #{title}
+</select>
+<!-- 도서 총 게시물 수-->
+<select id="selectBookTotalKst" parameterType="String" resultType="int">
+SELECT count(*)
+FROM books
+WHERE title like #{title}
+</select>
+
+<!-- 도서 검색결과 페이지 -->	
+<select id="selectBookListKst" parameterType="Book" resultType="Book">
+SELECT no,title,bookCover,writer,publisher,publicationDate,originalPrice,salesPrice,introduction,tableOfContents,salesVolume,type1,type2,ratingSum,ratingCount,regdate,stock,categoryNo
+FROM(SELECT no,title,bookCover,writer,publisher,publicationDate,originalPrice,salesPrice,introduction,tableOfContents,salesVolume,type1,type2,ratingSum,ratingCount,regdate,stock,categoryNo,rownum r
+	FROM(SELECT no,title,book_cover bookCover,writer,publisher,publication_date publicationDate,original_price originalPrice,sales_price salesPrice,introduction,table_of_contents tableOfContents,sales_volume salesVolume,type1,type2,NVL(rating_sum,0) ratingSum,NVL(rating_count,0) ratingCount,regdate,stock,category_no categoryNo
+		FROM books
+		WHERE title like #{title}
+		ORDER BY ${orderBy} DESC))
+WHERE r BETWEEN #{start} AND #{end}
+</select>
+
+<!-- 마이페이지 위시리스트 뿌리기 -->
+<select id="selectListWishBook" parameterType="int" resultType="Book">
+SELECT b.no,title,book_cover bookCover,writer,publisher,publication_date publicationDate,original_price originalPrice,sales_price salesPrice,introduction,table_of_contents tableOfContents,sales_volume salesVolume,type1,type2,NVL(rating_sum,0) ratingSum,NVL(rating_count,0) ratingCount,stock,category_no categoryNo
+FROM books b,wishList w
+WHERE b.no = w.book_no AND user_no=#{userNo}
+</select>
+
+<!-- 디테일 테스트 -->
+<select id="selectOneBook" parameterType="int" resultType="Book">
+SELECT no,title,book_cover bookCover,writer,publisher,publication_date publicationDate,original_price originalPrice,sales_price salesPrice,introduction,table_of_contents tableOfContents,sales_volume salesVolume,type1,type2,NVL(rating_sum,0) ratingSum,NVL(rating_count,0) ratingCount,regdate,stock,category_no categoryNo
+FROM books
+WHERE no=#{no} 
+</select>
+
+<!-- 추천도서 -->	
+<select id="selectListRecommendation" resultType="Book">
+SELECT no,title,book_cover bookCover,writer,publisher,publication_date publicationDate,original_price originalPrice,sales_price salesPrice,introduction,table_of_contents tableOfContents,sales_volume salesVolume,type1,type2,rating_sum ratingSum,rating_count ratingCount,regdate,stock,category_no categoryNo
+FROM books
+WHERE type1='r'
+</select>	
+	
+<select id="selectListPopularBook" resultType="Book">
+SELECT no,title,book_cover bookCover,writer,publisher,publication_date publicationDate,original_price originalPrice,sales_price salesPrice,introduction,table_of_contents tableOfContents,sales_volume salesVolume,type1,type2,rating_sum ratingSum,rating_count ratingCount,regdate,stock,category_no categoryNo
+FROM books
+WHERE type1='p'
+</select>	
+
+<!-- 신태end -->
+	<!-- 해인 -->
+	
+	<select id="selectBookToBuyHI" resultType="Book" parameterType="int">
+		SELECT no, title, book_cover bookCover, writer, publisher, sales_price salesPrice
+		FROM books
+		WHERE no=#{no}
+	</select>
+	
+	<!-- 책 주문시 재고에서 책 수량 변경, 판매량 변경 -->
+	<update id="updateStocksHI" parameterType="OrderDetail" >
+		UPDATE books SET stock = stock-#{quantity}, sales_volume = sales_volume+#{quantity}
+		WHERE no = #{bookNo}
+	</update>
+	<!-- 해인end -->
+	
+	<!-- 주영 -->
+	<select id="selectRecommendJY" resultType="Book">
+		<!-- <![CDATA[]] 처리해줘야 rownum <(닫힘태그)로 인식되지 X -->
+		<![CDATA[
+		SELECT no, title, writer, rating_sum ratingSum, rating_count ratingCount, book_cover bookCover
+		FROM books
+		WHERE type1='r'
+		AND rownum <=15
+		ORDER BY ratingSum/ratingCount
+		]]>
+	</select>
+	
+	<!-- index 신간도서 리스트 -->
+	<select id="selectNewJY" resultType="Book">
+		<!-- <![CDATA[]] 처리해줘야 rownum <(닫힘태그)로 인식되지 X -->
+		<![CDATA[
+		SELECT no, title, writer, rating_sum ratingSum, rating_count ratingCount, book_cover bookCover
+		FROM books
+		WHERE type1='n'
+		AND rownum <=15
+		ORDER BY publication_date DESC		
+		]]>
+	</select>
+	
+	<!-- subCategory 퓨울리춰상 리스트 -->
+	<select id="selectPulitzerJY" resultType="Book">
+		<!-- <![CDATA[]] 처리해줘야 rownum <(닫힘태그)로 인식되지 X -->
+		<![CDATA[
+		SELECT b.no, title, writer, rating_sum ratingSum, rating_count ratingCount, book_cover bookCover
+		FROM awarded_books a, books b, awards aw 
+		WHERE a.book_no=b.no 
+		AND a.award_no = aw.no
+		AND aw.name = '퓨울리춰상'
+		AND rownum <=15
+		ORDER BY sales_volume
+		]]>
+	</select>
+	
+	<!-- subCategory 도우늬문학상 리스트 -->
+	<select id="selectDounyJY" resultType="Book">
+		<!-- <![CDATA[]] 처리해줘야 rownum <(닫힘태그)로 인식되지 X -->
+		<![CDATA[
+		SELECT b.no, title, writer, rating_sum ratingSum, rating_count ratingCount, book_cover bookCover
+		FROM awarded_books a, books b, awards aw 
+		WHERE a.book_no=b.no 
+		AND a.award_no = aw.no
+		AND aw.name = '도우늬문학상'
+		AND rownum <=15
+		ORDER BY sales_volume
+		]]>
+	</select>
+	
+	<!-- subCategory 로붸르상 리스트 -->
+	<select id="selectNovelJY" resultType="Book">
+		<!-- <![CDATA[]] 처리해줘야 rownum <(닫힘태그)로 인식되지 X -->
+		<![CDATA[
+		SELECT b.no, title, writer, rating_sum ratingSum, rating_count ratingCount, book_cover bookCover
+		FROM awarded_books a, books b, awards aw 
+		WHERE a.book_no=b.no 
+		AND a.award_no = aw.no
+		AND aw.name = '로붸르문학상'
+		AND rownum <=15
+		ORDER BY sales_volume
+		]]>
+	</select>
+	
+	<!-- 주영 end -->
+	
+	<!-- 정배 -->
+	
+	<select id="SelectBestsellerListJB" resultType="Book" parameterType="Book">
+SELECT no,bookcover,title,writer,publisher,ratingSum,ratingCount,categoryNo,salesPrice,regdate,categoryName, r		
+FROM(SELECT no,bookcover,title,writer,publisher,ratingSum,ratingCount,categoryNo,salesPrice,regdate,categoryName, rownum r
+		FROM(SELECT b.no no,book_cover bookcover,title,writer,publisher,rating_sum ratingSum,rating_count ratingCount,category_no categoryNo,sales_price salesPrice,b.regdate regdate,
+		c.name categoryName
+		FROM books b, categories c
+		WHERE b.category_no = c.no
+		ORDER BY sales_volume DESC))
+WHERE r BETWEEN #{start} and #{end}
+
+	</select>
+	<select id="selectTotalJB" resultType="int">
+		SELECT COUNT(no)
+		FROM books
+	
+	</select>
+	<!-- 정배 end -->
+	
+	<!-- 선영 -->
+	
+	<select id="selectOneSY" parameterType="int" resultType="Book">
+	SELECT b.no, title, book_cover bookCover, writer, publisher, publication_date publicationDate, original_price originalPrice, sales_price salesPrice,introduction, table_of_contents tableOfContents,sales_volume salesVolume, type1,type2,rating_sum ratingSum,rating_count ratingCount,b.regdate,stock, category_no categoryNo, c.name name
+	FROM books b, categories c
+	WHERE b.no=#{no} and b.category_no = c.no
+	</select>
+	
+	<update id="updateRatingSY" parameterType="int">
+	UPDATE books SET rating_sum = #{ratingSum}, rating_count=#{ratingCount}
+	WHERE no = #{no}
+	</update>
+</mapper>

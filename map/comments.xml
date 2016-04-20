@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="comments">
+	
+	<select id="selectListSY" parameterType="Comment" resultType="Comment">
+		SELECT no, nickname, rating, contents, TO_CHAR(regdate,'YYYY"-"MM"-"DD') realDate, c.userNo, bookNo,NVL(comment_no,0) likes 
+		FROM (SELECT no, nickname, rating, contents, regdate, userNo, bookNo, rownum r
+		      FROM (SELECT no, nickname, rating, contents, regdate, user_no userNo,book_no bookNo
+		            FROM comments
+		            WHERE book_no = #{bookNo}
+		            ORDER BY no DESC)) c, (SELECT comment_no
+											FROM likes
+											WHERE user_no = #{userNo}) l
+
+		WHERE comment_no(+) = c.no AND r BETWEEN #{start} AND #{end}
+	</select>
+	
+	<select id="selectTopSY" parameterType="int" resultType="Comment">
+	SELECT no, nickname, rating, contents, rating, regdate, user_no userNo, book_no bookNo
+    FROM comments
+    WHERE no = (SELECT com
+                FROM(SELECT total, com, rownum r
+                     FROM(SELECT COUNT(l.comment_no) total, l.comment_no com
+                          FROM likes l, comments c
+                          WHERE c.book_no=#{no} AND l.comment_no=c.no
+                          GROUP BY l.comment_no
+                          ORDER BY 1 DESC))
+                          WHERE r =1) 
+	</select>
+
+	<insert id="insertSY" parameterType="Comment">
+		INSERT INTO comments(no,nickname,rating,contents,regdate,user_no,book_no)
+		VALUES(comments_seq.nextval,#{nickname},#{rating},#{contents},systimestamp,#{userNo},#{bookNo})
+	</insert>
+
+	<select id="selectTotalSY" parameterType="int" resultType="int">
+		SELECT COUNT(*)
+		FROM comments
+		WHERE book_no = #{no}
+	</select>
+	
+	<select id="selectCountSY" resultType="Comment">
+	SELECT COUNT(rating) ratingCount, SUM(rating) ratingSum
+	FROM comments
+	WHERE book_no = #{no}
+	</select>
+	
+	<delete id="deleteSY" parameterType="Comment">
+		DELETE comments
+		WHERE no=#{no} and user_no=#{userNo}
+	</delete>
+	
+</mapper>

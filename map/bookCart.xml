@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bookCart">
+	 <select id="selectBookCartJW" resultType="BookCart" parameterType="int">
+	SELECT no,quantity,sales_price salesPrice, regdate,book_cover bookCover,title,publisher,writer,book_no bookNo,user_no userNo
+	FROM book_cart
+	WHERE user_no=#{userNo}
+	ORDER BY regdate
+	</select>
+	
+	<select id="selectCartSumJW" resultType="int" parameterType="int">
+	SELECT SUM(sales_price)
+	FROM book_cart
+	WHERE user_no=#{userNo}
+	</select>
+	
+	<select id="selectCartCountJW" resultType="int" parameterType="int">
+	SELECT COUNT(no)
+	FROM book_cart
+	WHERE user_no=#{userNo}
+	</select>
+	
+	<delete id="deleteCartJW" parameterType="int">
+	DELETE FROM book_cart
+	WHERE no=#{no}
+	</delete>
+	
+
+	<update id="updateCartJW" parameterType="BookCart">
+	UPDATE book_cart
+	SET quantity=#{quantity}
+	WHERE no=#{no}
+	</update>
+	
+	<insert id="insertCartJW" parameterType="BookCart">
+	INSERT INTO book_cart(no, quantity,sales_price,regdate,book_cover,title,publisher,writer,book_no,user_no)
+	VALUES(book_cart_seq.nextval,1,#{salesPrice},systimestamp,#{bookCover},#{title},#{publisher},#{writer},#{bookNo},#{userNo})
+	</insert>
+	
+	
+	<!-- 신태 -->
+	
+<select id="selectListBookCart" parameterType="int" resultType="BookCart">
+SELECT no,quantity,sales_price salesPrice,regdate,book_cover bookCover,title,publisher,writer,book_no bookNo,user_no userNo
+FROM book_cart
+WHERE user_no = #{userNo}
+</select>
+
+<update id="updateQuantity" parameterType="BookCart">
+UPDATE book_cart SET quantity = #{quantity}
+WHERE no=#{no}
+</update>
+	<!--신태 end  -->
+	<!-- 해인 -->
+	
+	<!-- 구매시 카트에 담았던 책정보 보여주기 -->
+	<select id="selectBookListInCartHI" resultType="BookCart" parameterType="int">
+		SELECT no, quantity, sales_price salesPrice, regdate, book_cover bookCover, title, publisher, writer, book_no bookNo, user_no userNo, (quantity*sales_price) eachTotal
+		FROM book_cart
+		WHERE user_no=#{userNo}
+	</select>
+	
+	<!-- 총 결제금액 -->
+	<select id="selectBooksTotalHI" resultType="int" parameterType="int">
+		SELECT sum(quantity*sales_price) 
+		FROM book_cart
+		WHERE user_no=#{userNo}
+	</select>
+	
+	<!-- 장바구니 비우기 -->
+	<delete id="deleteBooksInCartHI" parameterType="int">
+		DELETE book_cart
+		WHERE no=#{no}
+	</delete>
+	
+	<!-- 해인end -->
+	<!-- 선영 -->
+	<insert id="insertSY" parameterType="BookCart">
+INSERT INTO book_cart(no, quantity, sales_price, regdate, book_cover, title, publisher, writer, book_no, user_no)
+VALUES (book_cart_seq.nextval, #{quantity}, #{salesPrice}, systimestamp, #{bookCover}, #{title}, #{publisher},#{writer},#{bookNo},#{userNo})
+
+</insert>
+
+</mapper>

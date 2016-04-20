@@ -1,0 +1,1142 @@
+/* input 보더 지우기 */
+
+body {
+    font-family: 'Kakao', sans-serif;
+}
+
+*:focus {
+    outline: none;
+}
+
+.template .title_link {
+    text-decoration: none;
+}
+.template input{
+    font-family: 'Kakao',sans-serif;
+}
+button{
+    font-family: 'Kakao',sans-serif;
+}
+input{
+    padding-left:5px;
+}
+.template #siteTitle {
+    font-family: 'Playfair Display SC', serif;
+    text-decoration: none;
+    text-shadow: 1px 1px 1px #000;
+    font-size: 45px;
+    color: white;
+    font-weight: 900;
+    margin-right: 10px;
+}
+
+
+/* 페이지 전체 css*/
+
+.template #pageWrap {
+    min-height: 800px;
+}
+
+
+/* 헤더 부분 css*/
+
+.template #headerWrap {
+    height: 165px;
+    margin: auto;
+    margin-bottom: 5px;
+    background-color: #424242;
+}
+
+
+/* 검색 부분 css */
+
+.template #searchFormBox {
+    height: 130px;
+    position: relative;
+    width: 980px;
+    height: 130px;
+    margin: auto;
+}
+
+
+
+/* 장바구니 리스트 li들*/
+
+.template #searchFormBox ul li #shoppingList li {
+    display: block;
+}
+
+.template #searchFormBox ul {
+    padding-top: 25px;
+    /*            background:red;*/
+}
+
+.template #searchFormBox ul li {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 30px;
+}
+
+
+/* 도서 검색 창 css */
+
+.template #searchFormBox ul #searchForm {
+    width: 400px;
+    height: 40px;
+    border: 1px solid #FFF;
+    border-radius: 5px 0px 0px 5px;
+    line-height: 20px;
+    background: linear-gradient(#e0e0e0, #fff);
+    vertical-align: middle;
+    font-size: 20px;
+    margin-left: -20px;
+}
+
+.template #searchFormBox ul #searchForm:focus {
+    
+    border: 1px solid rgba(129, 212, 250, 0.22);
+    background-color: white;
+}
+
+.template #searchFormBox ul #searchBtn{
+    width: 50px;
+    height: 46px;
+    border-radius: 0px 5px 5px 0px;
+    border: 1px solid #4f6b56;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 25px;
+    font-weight: 600;
+    text-align: center;
+    line-height: 45px;
+    background-color: #1c4928;
+    cursor: pointer;
+    margin-left: -3px;
+    color: white;
+}
+
+.template #searchFormBox ul label:hover {
+    background-color: #e0e0e0;
+}
+
+.template #searchFormBox ul img {
+    width: 300px;
+    height: 60px;
+}
+
+.template #searchFormBox ul .fa-shopping-basket,
+.template #searchFormBox ul .fa-question-circle {
+    font-size: 30px;
+    cursor: pointer;
+    color: #E0E0E0;
+    margin-right: -15px;
+}
+
+.template #searchFormBox ul .fa-shopping-basket {
+    margin-left: -15px;
+}
+
+.template #searchFormBox ul .fa-shopping-basket:hover,
+.template #searchFormBox ul .fa-question-circle:hover {
+    color: white;
+}
+
+/* 업데이트 {{*/
+.template #searchFormBox ul li #searchResultBox{
+    /* background: red; */
+    width: 407px;
+    height: 0;
+    min-height: 0;
+    top: 70px;
+    left:375px;
+    position: absolute;
+    z-index:4;
+}
+
+.template #searchResultBox ul{
+    padding: 0;
+    background: white;
+    min-height: 0;
+    border: 1px solid #424242;
+    
+}
+.template #searchFormBox ul li #searchResultBox li{
+    display: none;
+    width: 393px;
+    font-size: 15px;
+    margin-top: 10px;
+    margin-left: 5px;
+}
+#searchFormBox ul li #searchResultBox li:first-child{
+    margin-top: 5px;
+}
+#searchFormBox ul li #searchResultBox li:last-child{
+    margin-bottom: 5px;
+}
+.template #searchResultBox a{
+    text-decoration: none;
+    display: block;
+    color: black;
+    width: 393px;
+}
+.template #searchResultBox a:hover{
+    background: #EEEEEE; 
+}
+.template #searchFormBox ul li #searchWay{
+    display: inline-block;
+}
+
+/* }} 업데이트 */
+
+/* 카테고리 부분 css */
+
+.template #categoryForm {
+    width: 100%px;
+    height: 35px;
+    margin: auto;
+}
+
+#categoryForm #categoryBar {
+    width: 100%;
+    height: 35px;
+    text-align: center;
+    background-color: white;
+    border-bottom: 1px solid #999;
+    box-shadow: 0 5px 5px 1px #e9e9e9;
+    /*position: relative;*/
+}
+
+
+/* 카테고리  */
+
+.template #categoryForm #categoryBar li {
+    width: 194px;
+    height: 35px;
+    display: inline-block;
+    /*            border-left: 1px solid #999;*/
+    line-height: 30px;
+    /*            padding-top: px;*/
+/*                background-color: red;*/
+}
+
+.template #categoryForm #categoryBar li:nth-child(1) {
+    border: none;
+}
+
+.template #categoryForm #categoryBar li a {
+    display: block;
+    width: 194px;
+    height: 35px;
+    text-decoration: none;
+    color: black;
+    font-weight: 500;
+    line-height: 35px;
+    font-size: 18px;
+    z-index: 1;
+/*                background-color: cadetblue;*/
+}
+.template #categoryForm #categoryBar li:hover a+ul.category_list_box  {
+    display: block;
+}
+
+
+/* 각 카테고리 리스트 박스 css */
+
+.template #categoryForm #categoryBar .category_list_box {
+    width: 194px;
+    min-height: 20px;
+    position: absolute;
+    /*            margin:5px 0 5px 5px;*/
+    display: none;
+    /*            background-color: yellow;*/
+    border: 2px solid #235A32;
+    z-index:5;
+}
+.template #categoryBar .sepecial_value_books:hover a.reference_book+ul.sepecial_value_book{
+    display: block;
+    
+}
+.template #categoryBar .sepecial_value_books:hover a.classics+ul.sepecial_value_book{
+    display: block;
+    
+}
+.template #subjectsCategory{
+    z-index: 5;
+}
+.template #categoryForm #categoryBar #allSubjects {
+    width: 582px;
+    background:white;
+    overflow: hidden;
+    /*            background-color: aqua;*/
+}
+
+.template #categoryForm #categoryBar #allSubjects li {
+    float: left;
+}
+
+ .template #categoryBar .sepecial_value_book {
+    display: none;
+    width: 120px;
+    min-height: 30px;
+    background-color: white;
+    position: absolute;
+     transition: .3 ease;
+}
+
+.template #categoryBar .category_list_show {
+    display: block;
+}
+
+.template #categoryForm #categoryBar .category_special_Book_show {
+    display: block;
+}
+
+.template #categoryForm #categoryBar .ref_book {
+    top: -1px;
+    left: 194px;
+}
+
+.template #categoryForm #categoryBar .classics_book {
+    top: 32px;
+    left: 194px;
+}
+
+.template #categoryForm #categoryBar .sepecial_value_book {
+    
+    width: 120px;
+    border: 2px solid #235A32;
+    text-align: center;
+}
+
+.template #categoryForm #categoryBar .sepecial_value_book ul li {
+    width: 120px;
+    height: 30px;
+    line-height: 30px;
+    /*            background-color: deepskyblue;*/
+}
+
+.template #categoryForm #categoryBar .sepecial_value_book li a {
+    font: 600 15px 'Kakao', sans-serif;
+    width: 120px;
+    height: 30px;
+    line-height: 30px;
+    color: #666;
+    font-weight: 500;
+    margin: 0;
+}
+
+.template #categoryForm #categoryBar .sepecial_value_book li a:hover {
+    color: white;
+    background-color: darkolivegreen;
+}
+
+.template #categoryForm #categoryBar .category_list_box li {
+    width: 194px;
+    height: 30px;
+    /*           overflow: hidden;*/
+    /*            padding:3px;*/
+    /*            background: pink;*/
+}
+
+.template #categoryForm #categoryBar .category_list_box li:last-child,
+.template #categoryForm #categoryBar .sepecial_value_book li:last-child {}
+
+.template #categoryForm #categoryBar .category_list_box li .category_style {
+    display: block;
+    width: 194px;
+    height: 31px;
+    font: 400 18px 'Kakao', sans-serif;
+    line-height: 30px;
+    text-align: center;
+    text-decoration: none;
+    color: #666;
+    transition: .3s ease;
+    background-color: white;
+}
+
+.template #categoryForm #categoryBar .category_list_box li .category_style:hover {
+    color: white;
+    background-color: #1c4928;
+}
+
+/* content 부분 css */
+
+/* footer 부분 css*/
+
+.template #footerWrap {
+    margin-top: 5px;
+    border-top: 3px solid #d6d6d6;
+    
+}
+
+.template #footerMenu,
+.template #footer,
+.template #footerMenu ul {
+    width: 980px;
+    margin: auto;
+}
+.template #footer {
+    height: 150px;
+    top: 0;
+    left: 180px;
+}
+
+.template #footerMenu,
+.template #footerMenu ul {
+    height: 130px;
+    padding-top:10px;
+}
+
+/* footer 메뉴 부분 css*/
+
+.template #footerMenu ul li {
+    width: 242px;
+    height: 200px;
+    float: left;
+    /*            text-align: center;*/
+    font: 400 20px 'Kakao', sans-serif;
+    border-left: 1px solid #68826c;
+    position: relative;
+/*                background-color: #e9e9e9;*/
+    
+}
+
+.template .sbcrb_info {
+    /*    background-color: pink;*/
+    padding-top: 20px;
+}
+
+.template .company h3{
+    height:50px;
+    font-family: 'Playfair Display SC', serif;
+    font-size:26px;
+    font-weight: 800;
+    background-color: #424242;
+    color: white;
+    border-radius: 7px;
+    line-height: 50px;
+    width:90%;
+    margin: 20px auto;
+    margin-top: 40px;
+    border:1px solid #e0e0e0;
+    text-shadow: 1px 1px 1px black;
+    
+    
+}
+
+    
+.template #footerMenu .sbcrb_info h3 {
+    font-size: 22px;
+    font-weight: 400;
+    /*    background-color: orange;*/
+    text-align: center;
+    /*    height:50px;*/
+}
+
+.template #footerMenu .sbcrb_info p {
+    font-size: 18px;
+    font-weight: 200;
+    text-align: center;
+    margin: 10px 0 15px 0;
+}
+
+.template #footerMenu .sbcrb_info input {
+    width: 160px;
+    height: 24px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    margin-left: 15px;
+    background: linear-gradient(#e2e2e2, #fff);
+    vertical-align: middle;
+}
+
+.template #footerMenu .sbcrb_info button {
+    background: linear-gradient(#1c721b, #004f00);
+    color: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    width: 50px;
+    height: 30px;
+    vertical-align: middle;
+}
+
+.template #footerMenu ul li:nth-child(1) {
+    border: none;
+}
+
+.template #footerMenu ul li a {
+    display: block;
+    height: 30px;
+    /*            background-color: red;*/
+    color: #424242;
+    text-decoration: none;
+    text-align: center;
+}
+
+.template #footerMenu ul img {
+    width: 150px;
+    height: 100px;
+    display: block;
+    margin: auto;
+    margin-top: 15px;
+    cursor: pointer;
+}
+
+
+/* footer 정책 부분 css*/
+
+.template #footerMenu ul span {
+    padding-top: 30px;
+    font-weight: 300;
+    display: block;
+    width: 100%;
+}
+
+.template #footer #policy {
+    width: 980px;
+    height: 40px;
+    line-height: 40px;
+    background-color: white;
+    position: relative;
+    margin-top: 50px;
+}
+
+.template #policy ul {
+    width: 700px;
+    margin: auto;
+}
+
+.template #footer #policy li {
+    display: inline;
+    font-size: 15px;
+    border-left: 1px solid #424242;
+    padding-left: 5px;
+    margin-left: 4px;
+}
+
+.template #footer #policy li:hover {
+    text-decoration: underline;
+}
+
+.template #footer #policy li:first-child {
+    border: none;
+}
+
+.template #footer #policy a {
+    text-decoration: none;
+    color: #424242;
+}
+
+.template #footer #policy strong {
+    font-weight: 700;
+}
+
+.template #footer #policy address {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.template #footer #policy address a {
+    height: 40px;
+    display: inline-block;
+    line-height: 40px;
+    color: black;
+    text-decoration: none;
+    font-size: 13px;
+}
+
+
+/* 마이페이지 css */
+
+.template #mypage {
+    width: 130px;
+    
+    display: inline-block;
+/*
+    margin-top: 10px;
+    padding: 5px;
+*/
+    font-weight: 800;
+    font-size: 20px;
+    cursor: pointer;
+    color: #e0e0e0;
+    position: absolute;
+    bottom:25px;
+    right:20px;
+}
+
+
+.template #mypage:hover {
+    color: white;
+}
+
+
+/* 로그인 팝업창 css */
+
+.template #myageListBlock {
+    background: rgba(0, 0, 0, .4);
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 4;
+    display: none;
+}
+
+.template #loginFormBox {
+    width: 350px;
+    height: 350px;
+    /*            background: gray;*/
+    position: fixed;
+    top: 50%;
+    right: 50%;
+    box-shadow: 0 20px 20px 5px #777;
+    border: 1px solid #666;
+    border-radius: 8px;
+    margin-right: -175px;
+    margin-top: -175px;
+    z-index: 6;
+}
+
+.template #loginTitle {
+    height: 40px;
+    width: 100%;
+    border-radius: 8px 8px 0 0;
+    background-color: #e9e9e9;
+    border-bottom: 1px solid #444;
+}
+
+.template #loginTitle span {
+    display: block;
+    font-size: 18px;
+    font-weight: 500;
+    height: 40px;
+    /*    background: aqua;*/
+    /*    text-align: center;*/
+    padding-left: 10px;
+    line-height: 45px;
+    position: relative;
+}
+
+.template #loginTitle .cancel_login_form {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    color: white;
+    font-size: 17px;
+    line-height: 17px;
+    font-weight: 100;
+    display: block;
+    height: 27px;
+    width: 27px;
+    border-radius: 30px;
+    background-color: #3b7534;
+    border: 1px solid white;
+    /*    border:none;*/
+    cursor: pointer;
+    text-align: center;
+}
+
+.template #loginFormBox #loginForm {
+    padding-top: 10px;
+    width: 100%;
+    height: 310px;
+    background: white;
+    border-radius: 0px 0px 8px 8px;
+    /*            border: 1px solid #424242;*/
+}
+
+.template #loginFormBox #loginForm input {
+    background: linear-gradient(#e0e0e0, #fff);
+}
+
+.template #loginFormBox hr {
+    width: 90%;
+    color: #e0e0e0;
+    margin-bottom: 20px;
+}
+
+.template #loginFormBox form {
+    padding-top: 15px;
+}
+
+.template #loginFormBox p {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.template #loginFormBox #id,
+.template #loginFormBox #password {
+    width: 178px;
+    height: 33px;
+    padding-left: 10px;
+    font-size: 15px;
+    line-height: 18px;
+    vertical-align: middle;
+    border: 1px solid #999;
+    background-color: #E0E0E0;
+    border-radius: 5px;
+}
+
+.template #id:focus {
+    background-color: white;
+}
+
+.template #loginFormBox .loginBtn {
+    display: block;
+    margin: auto;
+    border: 1px solid #d6d6d6;
+    width: 176px;
+    height: 41px;
+    letter-spacing: 5px;
+    font: 400 20px 'Kakao', sans-serif;
+    margin: 15px auto;
+    cursor: pointer;
+    border-radius: 5px;
+    background: linear-gradient(#426d4e, #235a32);
+    color: #fff;
+}
+
+.template #loginFormBox .loginBtn:hover {
+    background-color: white;
+    box-shadow: 0px 0px 25px white;
+}
+
+.template #loginFormBox p label {
+    display: block;
+    margin: 0 0 3px 60px;
+    text-align: left;
+    width: 80px;
+    height: 20px;
+    font: 400 20px 'Kakao', sans-serif;
+    line-height: 20px;
+}
+
+.template #loginFormBox #joinBtn,
+.template #loginFormBox #findPwd {
+    display: inline-block;
+    text-align: center;
+    width: 130px;
+    height: 30px;
+    vertical-align: middle;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-left: 11px;
+}
+
+.template #loginFormBox #joinBtn {
+    font-size: 25px;
+    line-height: 30px;
+    color: black;
+}
+
+.template #loginFormBox #findPwd {
+    font-size: 15px;
+    text-align: left;
+    color: black;
+}
+
+.template #loginFormBox #findPwd:hover {
+    text-decoration: underline;
+}
+
+.template #searchFormBox #mypageList {
+    width: 120px;
+    min-height: 100px;
+    background: white;
+    position: absolute;
+    top: 110px;
+    right:30px;
+    display: none;
+    z-index: 3;
+    /* background-color: pink; */
+}
+
+.template #searchFormBox #mypageList ul {
+    padding:0;
+    min-height: 100px;
+    /*background-color: white;*/
+    border: 1px solid #424242;
+    background-color: white;
+}
+
+.template #searchFormBox #mypageList ul li, .delete {
+    width: 120px;
+    height: 39px;
+    text-align: center;
+    font: 400 12px 'Kakao', sans-serif;
+    font-size: 17px;
+    line-height: 39px;
+    border-bottom: 1px solid #aaa;
+                
+}
+.template .delete{
+	background:white;
+	border: none;
+	width: 117px;
+	color:crimson;
+}
+.template #searchFormBox #mypageList ul li:last-child,
+.template #shoppingList ul li:last-child {
+    border-bottom: none;
+}
+
+
+/* 마이페이지 로그인,회원가입 li*/
+
+.template #searchFormBox #mypageList ul #mypageLogin {
+    font-weight: 600;
+}
+
+.template #searchFormBox #mypageList ul li a {
+    width: 118px;
+    height: 39px;
+    display: block;
+    line-height: 39px;
+    text-decoration: none;
+    color: #666;
+    transition: ease .3s;
+}
+
+.template #searchFormBox #mypageList ul li a:hover, .template .delete:hover {
+    color: white;
+    background-color: #2b5624;
+    cursor: pointer;
+}
+
+
+/* 장바구니 리스트 css*/
+
+ .template #searchFormBox #shoppingList {
+    width: 300px;
+    min-height: 100px;
+    margin-top: 10px;
+    /*            margin-right:20px;*/
+    position: absolute;
+    top: 45px;
+    /*            right:100px;*/
+    display: none;  
+    right: 90px;
+    border: 2px solid #424242;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: white;
+     transition:.3s ease;
+     z-index: 4;
+}
+
+
+
+
+.template #shoppingList h2 {
+    font-size: 30px;
+       background-color:aqua;
+    border-radius: 5px 5px 0 0;
+}
+
+.template #shoppingList ul {
+    border-radius: 5px;
+    width: 280px;
+    min-height: 100px;
+    padding: 0;
+    background-color: white;
+    /*            overflow: visible;*/
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding: 10px;
+}
+
+ .template #shoppingList ul li {
+    width: 100%;
+    height: 120px;
+    /*            padding-left:10px;*/
+    margin: 0;
+    border-top: 1px solid #999;
+    position: relative;
+/*                background-color: pink; */
+}
+
+
+.template #bookCartForm button{
+	border: none;
+	text-decoration: none;
+	background-color:#424242;
+	
+}
+ .template #shoppingList #cartMsg {
+    width: 280px;
+    height: 50px;
+    margin: 0;
+    font: 400 17px 'Kakao', sans-serif;
+    line-height: 100px;
+    text-align: center;
+    color: #666;
+    background-color: white;
+    position: absolute;
+}
+
+.template #shoppingList ul li>a {
+    text-decoration: none;
+    margin-left: 0;
+    /*            background-color: violet;*/
+}
+
+.template #shoppingList ul li .book_info {
+    display: inline-block;
+    width: 190px;
+    min-height: 100px;
+    padding: 5px;
+    margin-top: 0;
+    position: absolute;
+    /*            background-color: yellow;*/
+}
+
+ .template #shoppingList ul li .book_info p {
+    margin-top: 5px;
+    padding-left: 30px;
+}
+
+ .template #shoppingList ul li img {
+    width: 70px;
+    height: 90px;
+    padding: 5px;
+    background-color: white;
+}
+
+ .template #shoppingList ul li img:hover {
+    display: block;
+    position: absolute;
+    z-index: 3;
+}
+
+.template #shoppingList ul li .book_name {
+    display: block;
+    height: 20px;
+    font: 600 18px 'Kakao', sans-serif;
+}
+
+.template #shoppingList ul li .book_author {
+    display: block;
+    width: 100px;
+    height: 30px;
+    color: black;
+    margin-top: 5px;
+    text-decoration: none;
+    font-weight: 400;
+}
+
+ .template #shoppingList ul li .book_price {
+    display: inline-block;
+    height: 20px;
+    font-size: 15px;
+    color: crimson;	
+}
+
+.template #shoppingList ul li .quantity {
+    width: 30px;
+    text-align: center;
+    margin-left: 30px;
+}
+
+.template  .shopping_update_btn{
+	width:150px;
+	/* background: blue; */
+	position: absolute;
+	padding:0;
+	right: 80px;
+	top: 80px;
+}
+
+.template .shopping_update_btn button, .template .purchase_form button{
+	border:1px solid #666;
+}
+.template .purchase_form{
+	min-width: 50px;
+	min-height:20px;
+	line-height:20px;
+	display: inline-block;
+	position: absolute;
+	bottom:7px;
+	right:12px;
+
+}
+
+ .template #shoppingList ul li .book_purchase {
+    text-decoration: none;
+    height:23px;
+    line-height:8px;
+   	display: inline-block;
+    font-size: 15px;  
+    color: black;
+	background:linear-gradient(#e0e0e0, #fff);; 
+    vertical-align: middle;
+
+    
+}
+.template .quantity_update{
+	/* background:red; */
+	background:white;
+	font-size:15px;
+	color: black;
+	background:linear-gradient(#e0e0e0, #fff);; 
+	
+}
+.template #shoppingList ul li .quantity_update:hover,
+ .template #shoppingList ul li .book_purchase:hover {
+    background: darkgreen;
+    color:white;
+    cursor: pointer;
+}
+
+.template #welcome {
+    font-size: 13px;
+    color: white;
+    padding-top: 10px;
+    padding-left: 3px;
+    display: block;
+}
+
+
+/* 말풍선 효과 css */
+
+.template .triangle {
+    display: inline-block;
+    position: absolute;
+    width: 0;
+    height: 0;
+    top: -30px;
+    left: 69px;
+    border-style: solid;
+    border-width: 15px;
+    /*            background-color: red;*/
+}
+
+.template .triangle.test_2 {
+    position: absolute;
+    top: -30px;
+    left: 30px;
+    border-color: transparent transparent #235A32 transparent;
+}
+
+
+/* 사이드 바  css*/
+
+.template #sidebarWrap {
+/*    background-color: coral;*/
+    width: 96px;
+    min-height: 206px;
+    position: absolute;
+    top: 190px;
+    right: 70px;
+    background-color: white;
+    border: 2px solid #7a8776;
+}
+
+.template #sidebarWrap h4 {
+    font: 300 15px 'Kakao', sans-serif;
+    text-align: center;
+    margin-bottom: 3px;
+}
+
+.template #sidebarWrap #sidebarAllBox {
+    width: 86px;
+    min-height: 206px;
+    margin: 5px;
+}
+
+.template #sidebarWrap #sidebarAllBox .sidebar_box {
+    width: 86px;
+    height: 155spx;
+    border-bottom: 1px solid #424242;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.template #sidebarWrap #sidebarAllBox .sidebar_img img {
+    width: 60px;
+    height: 80px;
+}
+
+.template #sidebarWrap #sidebarAllBox #sidebarRecentBook {
+    min-height: 100px;
+    margin-bottom: -15px;
+    border-bottom: none;
+}
+.template .recent_book.msg{
+    display: none;
+}
+.template #sidebarWrap #sidebarAllBox #sidebarRecentBook #recentBookImgBoxWrap {
+    padding-top: 5px;
+    position: relative;
+    min-height: 100px;
+    border: 1px solid #666;
+}
+
+.template .fa-caret-left,
+.template .fa-caret-right {
+    position: absolute;
+    font-size: 25px;
+    color: #666;
+    cursor: pointer;
+}
+
+.template .fa-caret-left {
+    bottom: 5px;
+    left: 10px;
+}
+
+.template .fa-caret-right {
+    bottom: 5px;
+    right: 10px;
+}
+
+.template #sidebarWrap #sidebarAllBox #sidebarRecentBook #recentBookImgBox {
+    min-height: 50px;
+    margin: auto;
+/*    background: red;*/
+}
+
+.template #sidebarWrap #sidebarAllBox #sidebarRecentBook #recentBookImgBox img {
+    width: 80px;
+    height: 80px;
+}
+
+.template #sidebarWrap #sidebarAllBox #sidebarRecentBook #recentBookImgBox li {
+    margin: auto;
+    margin-bottom: 5px;
+    width: 80px;
+    height: 80px;
+}
+
+.template #sidebarWrap #sidebarAllBox .sidebar_submenu {
+    background:white;
+    
+    width: 85px;
+    height: 40px;
+    font-size: 40px;
+    text-align: center;
+    line-height: 35px;
+    margin-bottom: 1px;
+    border: 1px solid #aaa;
+}
+.template #sidebarWrap #moveToTop{
+    visibility: hidden;
+}
+
+.template #sidebarWrap #sidebarAllBox .sidebar_submenu a {
+    display: block;
+    width: 85px;
+    height: 40px;
+    text-decoration: none;
+    color: #666;
+}
+.template #contents{
+    padding-top: 30px;
+}
+.template .shopping{
+    
+}
+.template #headerWrap .shopping:hover form+#shoppingList{
+    display: block;
+}

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="users">
+		
+		<!-- 신태 -->
+<!-- 로그인 -->
+<select id="selectOneKst" parameterType="User" resultType="User">
+SELECT no,id,password,nickname,birth_date birthDate,regdate
+FROM users
+WHERE id=#{id} AND password=#{password}
+</select>
+	
+	
+<!-- 계정 수정 닉네임-->
+<update id="updateNicknameKst" parameterType="User">
+UPDATE users SET nickname=#{nickname}
+WHERE no=#{no}
+</update>
+
+<!-- 계정 수정 아이디-->
+<update id="updateIdKst" parameterType="User">
+UPDATE users SET id=#{id}
+WHERE no=#{no}
+</update>
+
+<!-- 계정 수정 비밀번호-->
+<update id="updatePasswordKst" parameterType="User">
+UPDATE users SET password=#{password}
+WHERE no=#{no}
+</update>
+	<!-- 신태 -->
+
+	<!-- 해인 -->
+	
+	<!-- 로그인 -->
+	<select id="selectLoginUserHI" parameterType="User" resultType="User">
+		SELECT no, id, password, nickname, birth_date birthDate, regdate
+		FROM users
+		WHERE id=#{id} AND password=#{password}
+	</select>
+	
+	
+	<!-- 회원가입 -->
+	<insert id="insertUserHI" parameterType="User">
+		INSERT INTO users(no, id, password, nickname, birth_date, regdate)
+		VALUES (users_seq.nextval, #{id}, #{password}, #{nickname}, #{birthDate}, systimestamp)
+	</insert>
+	
+	<!-- 해인end -->
+</mapper>

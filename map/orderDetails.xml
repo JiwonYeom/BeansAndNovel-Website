@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="orderDetails">
+	<!-- 해인 -->
+	
+	<!-- 주문했을 때 주문번호 추가 -->
+	<insert id="insertOrderDetailHI" parameterType="OrderDetail">
+		INSERT INTO order_details(no, quantity, regdate, total_price, book_cover, title, writer, publisher, book_no, order_no)
+		VALUES (order_details_seq.nextval, #{quantity}, systimestamp, #{totalPrice}, #{bookCover}, #{title}, #{writer}, #{publisher}, #{bookNo}, #{orderNo})
+	</insert>
+	<!-- 해인end -->
+	
+	<!-- 주영 -->
+	
+	<!-- orderDetail 상품정보 리스트 -->
+	<select id="selectListJY" resultType="OrderDetail" parameterType="int">
+		SELECT no, book_cover bookCover, title, writer, publisher, quantity, total_price totalPrice
+		FROM order_details
+		WHERE order_no=#{orderNo}
+	</select>
+	
+	<!-- 총 결제금액 -->
+	<select id="selectBooksTotalJY" resultType="int" parameterType="int">
+		SELECT total_price totalPrice
+		FROM order_details
+		WHERE order_no=#{orderNo}
+	</select>
+	<!-- 주영 end -->
+</mapper>
