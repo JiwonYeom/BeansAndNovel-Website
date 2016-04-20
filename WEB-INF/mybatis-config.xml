@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC
+"-//mybatis.org/DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+<typeAliases>
+	<typeAlias type="com.wiring.bnn.vo.Address" alias="Address"/>
+	<typeAlias type="com.wiring.bnn.vo.AwardedBook" alias="AwardedBook"/>
+	<typeAlias type="com.wiring.bnn.vo.Award" alias="Award"/>
+	<typeAlias type="com.wiring.bnn.vo.Book" alias="Book"/>
+	<typeAlias type="com.wiring.bnn.vo.BookCart" alias="BookCart"/>
+	<typeAlias type="com.wiring.bnn.vo.Category" alias="Category"/>
+	<typeAlias type="com.wiring.bnn.vo.Comment" alias="Comment"/>
+	<typeAlias type="com.wiring.bnn.vo.Like" alias="Like"/>
+	<typeAlias type="com.wiring.bnn.vo.Order" alias="Order"/>
+	<typeAlias type="com.wiring.bnn.vo.OrderDetail" alias="OrderDetail"/>
+	<typeAlias type="com.wiring.bnn.vo.Report" alias="Report"/>
+	<typeAlias type="com.wiring.bnn.vo.Stock" alias="Stock"/>
+	<typeAlias type="com.wiring.bnn.vo.User" alias="User"/>
+	<typeAlias type="com.wiring.bnn.vo.Wishlist" alias="Wishlist"/>
+	
+</typeAliases>
+<mappers>
+	<mapper resource="com/wiring/bnn/map/addresses.xml"/>
+	<mapper resource="com/wiring/bnn/map/awardedBooks.xml"/>
+	<mapper resource="com/wiring/bnn/map/awards.xml"/>
+	<mapper resource="com/wiring/bnn/map/bookCart.xml"/>
+	<mapper resource="com/wiring/bnn/map/books.xml"/>
+	<mapper resource="com/wiring/bnn/map/categories.xml"/>
+	<mapper resource="com/wiring/bnn/map/comments.xml"/>
+	<mapper resource="com/wiring/bnn/map/likes.xml"/>
+	<mapper resource="com/wiring/bnn/map/orderDetails.xml"/>
+	<mapper resource="com/wiring/bnn/map/orders.xml"/>
+	<mapper resource="com/wiring/bnn/map/reports.xml"/>
+	<mapper resource="com/wiring/bnn/map/stocks.xml"/>
+	<mapper resource="com/wiring/bnn/map/users.xml"/>
+	<mapper resource="com/wiring/bnn/map/wishlists.xml"/>
+	
+</mappers>
+</configuration>

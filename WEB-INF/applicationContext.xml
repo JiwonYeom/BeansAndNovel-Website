@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd">
+
+<!-- jndi -->
+<jee:jndi-lookup id="dataSource" jndi-name="java:comp/env/oraclexe"/>
+
+<!-- 트랜젝션매니저 -->
+	<bean class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
+	id="transactionManager"
+	p:dataSource-ref="dataSource"/>
+	
+	<tx:advice id="txAdvice">
+		<tx:attributes>
+			<tx:method name="show*" read-only="true"/>
+			<tx:method name="get*" read-only="true"/>
+			<!-- select구문 트랜잭션을 걸지 않고, 읽어오기만 -->
+			<tx:method name="remove*" propagation="REQUIRED"/>
+			<tx:method name="create*" propagation="REQUIRED"/>
+		</tx:attributes>
+	</tx:advice>
+	
+	<aop:config>
+		<aop:pointcut expression="execution(public * com.wiring.bnn.service.HaeIn*.*(..))" id="txPoint"/>
+		<aop:advisor pointcut-ref="txPoint" advice-ref="txAdvice"/>
+	</aop:config>
+
+
+<!-- 에러처리 -->
+<!-- 
+<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+	
+	<property name="exceptionMappings">
+		<props>
+			<prop key="NullPointerException">noValue</prop>
+		</props>
+	</property>
+	위에서 맵핑처리되지 않은 에러들은 디폴트에러뷰로 처리함. WEB-INF/view에 defaultError.jsp를 만듦.
+	<property name="defaultErrorView" value="defaultError"></property>
+</bean>
+ -->
+
+
+<!-- sqlsession -->
+<!-- SqlSessionFactory 팩토리-->
+<bean id="sqlSessionFactory" 
+p:configLocation="WEB-INF/mybatis-config.xml"
+p:dataSource-ref="dataSource"
+class="org.mybatis.spring.SqlSessionFactoryBean"
+/>
+
+<!-- SqlSessionTemplate(편리한 기능) -->
+<bean id="sqlSession"
+class="org.mybatis.spring.SqlSessionTemplate">
+<constructor-arg ref="sqlSessionFactory"></constructor-arg>
+</bean>
+
+<!-- DAO설정 -->
+<bean class="com.wiring.bnn.dao.JiWonDAOImpl" 
+p:session-ref="sqlSession"
+id="JiWonDAO"
+/>
+
+<!-- 해인-->
+<bean class="com.wiring.bnn.dao.HaeInDAOImpl"
+id="haeInDAO"
+p:session-ref="sqlSession"/>
+
+
+<!-- 신태 -->
+<!-- 주입이 될때는 id가 있어야한다. id로 주입시킨다. -->
+<bean id="kstDAO" p:session-ref="sqlSession" class="com.wiring.bnn.dao.KstDAOImpl"></bean>
+
+<!-- 주영 -->
+<!-- DAO -->
+	<bean id="juYeongDAO"
+	p:session-ref="sqlSession"
+	class="com.wiring.bnn.dao.JuYeongDAOImpl"
+	/>
+	
+	<!-- 정배 -->
+<bean id="jbDAO"
+p:session-ref="sqlSession"
+ class="com.wiring.bnn.dao.JBDAOImpl" />
+ 
+ <!-- 선영 -->
+<bean class="com.wiring.bnn.dao.SunyoungDAOImpl" id="sunyoungDAO"
+p:session-ref="sqlSession"/>
+
+<!-- Service설정 -->
+<bean class="com.wiring.bnn.service.JiWonServiceImpl"
+p:dao-ref="JiWonDAO"
+p:numBlock="5"
+p:numPage="12"
+p:order="popularity"
+p:dataMap-ref="concurrentHashMap"
+p:paginate-ref="paginateUtil"
+id="JiWonService"
+/>
+
+<!--신태 -->
+<!-- 패키지명.Impl -->
+<bean id="kstService" p:paginateUtil-ref="paginateUtil" p:kstDAO-ref="kstDAO" class="com.wiring.bnn.service.KstServiceImpl"></bean>
+
+<bean class="java.util.concurrent.ConcurrentHashMap"
+id="concurrentHashMap"
+/>
+
+
+<!-- 해인-->
+<bean class="com.wiring.bnn.service.HaeInServiceImpl"
+id="haeInService"
+p:dao-ref="haeInDAO"/>
+
+<!-- 주영 -->
+	<!-- Service -->
+	<bean id="juYeongService"
+	p:juYeongDAO-ref="juYeongDAO"
+	class="com.wiring.bnn.service.JuYeongServiceImpl"
+	/>
+<!--정배  -->
+  <bean id="JBService"
+p:jbdao-ref="jbDAO"
+class="com.wiring.bnn.service.JBServiceImpl"/>
+
+<!-- 선영 -->
+<bean class="com.wiring.bnn.service.SunyoungServiceImpl"
+p:sunyoungDAO-ref="sunyoungDAO" id="sunyoungService"/>
+
+<!-- Util등록 -->
+<bean class="com.wiring.bnn.util.PaginateUtil"
+id="paginateUtil"
+/>
+
+
+</beans>

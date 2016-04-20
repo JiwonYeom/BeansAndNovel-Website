@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd">
+
+<!-- spring WEB MVC -->
+<mvc:annotation-driven/>
+<!-- json이 작동하게끔 하는 것도 이 안에 있으므로 설정해줘야함 -->
+
+<!-- InternalResourceView 편리 -->
+<mvc:view-resolvers>
+	<mvc:jsp prefix="/WEB-INF/view/" suffix=".jsp"/>
+</mvc:view-resolvers>
+
+
+<mvc:resources location="/css/" mapping="/css/**"/>
+<mvc:resources location="/img/" mapping="/img/**"/>
+<mvc:resources location="/js/" mapping="/js/**"/>
+<mvc:resources location="/fonts/" mapping="/fonts/**"/>
+
+
+<mvc:view-controller path="/companyInfo"/>
+<mvc:view-controller path="/findStore"/>
+<mvc:view-controller path="/help"/>
+
+<!-- 인터셉터 -->
+
+<mvc:interceptors>
+	<!--  로그인 안되있으면 주소창으로 접근 불가능한 페이지 -->
+	<mvc:interceptor>
+		<mvc:mapping path="/update"/>
+		<mvc:mapping path="/mypage"/>
+		<mvc:mapping path="/wishlist"/>
+		<mvc:mapping path="/bookCart"/>
+		<bean class="com.wiring.bnn.interceptor.LoginInterceptorKst"></bean>
+	</mvc:interceptor>
+
+</mvc:interceptors>
+ 
+
+<bean class="com.wiring.bnn.controller.JiWonController"
+p:service-ref="JiWonService"
+p:STservice-ref="kstService"
+id="JiWonController"/>
+
+ <!-- 신태 컨트롤러 등록 -->
+<bean p:kstService-ref="kstService" class="com.wiring.bnn.controller.SinTaeController"></bean>
+
+<!-- 해인 -->
+<bean class="com.wiring.bnn.controller.HaeInController"
+p:service-ref="haeInService"/>
+
+<!-- 주영 -->
+<bean p:juYeongService-ref="juYeongService"
+	class="com.wiring.bnn.controller.JuYeongController"/>
+
+<!-- 정배 -->	
+<bean p:service-ref="JBService" class="com.wiring.bnn.controller.JBController" />
+
+<!-- 선영 -->
+<bean 
+p:service-ref="sunyoungService"
+class="com.wiring.bnn.controller.SunyoungController"/>
+</beans>
+
