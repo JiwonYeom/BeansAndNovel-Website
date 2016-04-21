@@ -12,10 +12,10 @@ body {
     text-decoration: none;
 }
 .template input{
-    font-family: 'Kakao',sans-serif;
+    font-family: 'bon',sans-serif;
 }
 button{
-    font-family: 'Kakao',sans-serif;
+    font-family: 'bon',sans-serif;
 }
 input{
     padding-left:5px;
@@ -316,7 +316,7 @@ input{
 }
 
 .template #categoryForm #categoryBar .sepecial_value_book li a {
-    font: 600 15px 'Kakao', sans-serif;
+    font: 600 15px 'bon', sans-serif;
     width: 120px;
     height: 30px;
     line-height: 30px;
@@ -345,7 +345,7 @@ input{
     display: block;
     width: 194px;
     height: 31px;
-    font: 400 18px 'Kakao', sans-serif;
+    font: 400 18px 'bon', sans-serif;
     line-height: 30px;
     text-align: center;
     text-decoration: none;
@@ -394,7 +394,7 @@ input{
     height: 200px;
     float: left;
     /*            text-align: center;*/
-    font: 400 20px 'Kakao', sans-serif;
+    font: 400 20px 'bon', sans-serif;
     border-left: 1px solid #68826c;
     position: relative;
 /*                background-color: #e9e9e9;*/
@@ -689,7 +689,7 @@ input{
     width: 176px;
     height: 41px;
     letter-spacing: 5px;
-    font: 400 20px 'Kakao', sans-serif;
+    font: 400 20px 'bon', sans-serif;
     margin: 15px auto;
     cursor: pointer;
     border-radius: 5px;
@@ -708,7 +708,7 @@ input{
     text-align: left;
     width: 80px;
     height: 20px;
-    font: 400 20px 'Kakao', sans-serif;
+    font: 400 20px 'bon', sans-serif;
     line-height: 20px;
 }
 
@@ -764,7 +764,7 @@ input{
     width: 120px;
     height: 39px;
     text-align: center;
-    font: 400 12px 'Kakao', sans-serif;
+    font: 400 12px 'bon', sans-serif;
     font-size: 17px;
     line-height: 39px;
     border-bottom: 1px solid #aaa;
@@ -867,7 +867,7 @@ input{
     width: 280px;
     height: 50px;
     margin: 0;
-    font: 400 17px 'Kakao', sans-serif;
+    font: 400 17px 'bon', sans-serif;
     line-height: 100px;
     text-align: center;
     color: #666;
@@ -912,7 +912,7 @@ input{
 .template #shoppingList ul li .book_name {
     display: block;
     height: 20px;
-    font: 600 18px 'Kakao', sans-serif;
+    font: 600 18px 'bon', sans-serif;
 }
 
 .template #shoppingList ul li .book_author {
@@ -1033,7 +1033,7 @@ input{
 }
 
 .template #sidebarWrap h4 {
-    font: 300 15px 'Kakao', sans-serif;
+    font: 300 15px 'bon', sans-serif;
     text-align: center;
     margin-bottom: 3px;
 }
