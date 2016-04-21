@@ -10,7 +10,7 @@
  
     <style>
         body {
-            font-family: "Kakao", sans-serif;
+            font-family: "bon", sans-serif;
         }
         
         #contents {
