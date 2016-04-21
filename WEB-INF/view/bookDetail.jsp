@@ -15,7 +15,7 @@ html {
 }
 
 body {
-	font-family: 'Kakao', sans-serif;
+	font-family: "bon", sans-serif;
 }
 
 :-moz-any-link:focus {
