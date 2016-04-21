@@ -9,7 +9,7 @@
   <c:import url="template/link.jsp"></c:import>
     <style>
         body{
-            font-family: 'Kakao', sans-serif;
+            font-family: "bon", sans-serif;
         }
         
         /* 계정 수정 공통 css {{ */
