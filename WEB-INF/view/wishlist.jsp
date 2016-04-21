@@ -17,7 +17,7 @@
         
         body {
             width: 100%;
-            font-family: 'Kakao', sans-serif;
+            font-family: "bon", sans-serif;
             font-weight: 200;
         }
         
