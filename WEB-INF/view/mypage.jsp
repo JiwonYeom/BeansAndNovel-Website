@@ -11,7 +11,7 @@
     
     <style>
         body{
-            font-family: 'Kakao',sans-serif;
+            font-family: "bon", sans-serif;
         }
         /* 내정보 전체 페이지 div*/
         #myPageWrap{
