@@ -10,7 +10,7 @@
     <c:import url="template/link.jsp"></c:import>
     <style>
         body {
-            font-family: "Kakao", sans-serif;
+            font-family: "bon", sans-serif;
         }
         
         #contents {
