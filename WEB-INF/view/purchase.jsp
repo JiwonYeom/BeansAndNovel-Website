@@ -85,7 +85,7 @@
             bottom: 20px;
             cursor: pointer;
             border-radius: 5px;
-            font-family: 'Kakao',sans-serif;
+            font-family: "bon", sans-serif;
         }
         
         .btn:hover {
