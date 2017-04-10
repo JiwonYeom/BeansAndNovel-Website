@@ -232,8 +232,6 @@ public class JiWonController {
 		System.out.println(address.getPhone());
 		if(address.getShippingAddress()==null) {
 			address.setShippingAddress("n");
-			address.setShippingAddress("test");
-			address.setShippingAddress("test2");
 		}
 		
 		System.out.println("주소 수정결과: "+service.upateAddress(address));
